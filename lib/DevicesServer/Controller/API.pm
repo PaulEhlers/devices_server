@@ -15,9 +15,6 @@ sub base : Chained('/') PathPart('api') CaptureArgs(0) {
 
 sub base_login : Chained('base') PathPart('') CaptureArgs(0) {
 	my ( $self, $c) = @_;
- 	
-    #my $email = $c->req->data->{email};
-    #my $password = $c->req->data->{password};
 
     my ($email, $password) = $c->req->headers->authorization_basic();
 
