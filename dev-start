@@ -1,0 +1,2 @@
+#!/bin/bash
+script/devicesserver_server.pl -d -r

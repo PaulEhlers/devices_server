@@ -1,0 +1,9 @@
+# rename this file to devicesserver.yml and put a ':' after 'name' if
+# you want to use YAML like in old versions of Catalyst
+name: DevicesServer
+Model::DB:
+    schema_class: DevicesServer::Schema
+    connect_info:
+        - DBI:SQLite:dbname=__path_to(db/devices.db)__
+        - ""
+        - ""
