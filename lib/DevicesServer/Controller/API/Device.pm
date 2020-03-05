@@ -90,12 +90,39 @@ sub devices_list_GET {
 		id => $_->get_column('device_id'), 
 		setup_date => $_->get_column('setup_date'),
 		location_name => $_->get_column('location_name'),
-		room_namer => $_->get_column('room_name'),
+		room_name => $_->get_column('room_name'),
 		 } } $devices_rs->all();
 
 	$self->return_success(
 		$c,
 		\@devices
+	);
+}
+
+sub devices_list_POST {
+	my ($self, $c) = @_;
+
+	my $user = $c->stash->{user};
+
+	my $data = $c->req->data;
+
+	if(!$data->{type} || !$data->{roomid}) {
+		$self->detach_bad_request( $c, "Please send type and roomid");
+	}
+
+	my $room = $c->model('DB::Room')->find($data->{roomid});
+	unless($room) {
+		$self->detach_bad_request( $c, "Please send valid roomid");	
+	}
+
+	$user->devices->create({
+			room_id => $room->id,
+			type => $data->{type}, 
+		});
+
+	$self->return_success(
+		$c,
+		{}
 	);
 }
 

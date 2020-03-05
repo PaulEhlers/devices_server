@@ -1,8 +1,15 @@
+CREATE TABLE company (
+ company_id INTEGER PRIMARY KEY AUTOINCREMENT,
+ name TYPE text NOT NULL
+);
+
 CREATE TABLE user (
  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
  fullname TYPE text NOT NULL,
  email TYPE text NOT NULL,
- password TYPE text NOT NULL
+ password TYPE text NOT NULL,
+ company_id TYPE INTEGER,
+ FOREIGN KEY(company_id) REFERENCES company(company_id)
 ); 
 
 CREATE TABLE location (
